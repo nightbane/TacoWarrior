@@ -1,49 +1,36 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using HairsparyTacoWarrior.data;
+using HairsprayTacoWarrior.logic;
 
-Console.WriteLine("Hello, World!");
-
+var game = new GameRunner();
 
 Console.Write("Create new game (y/n): ");
-string choice = Console.ReadLine();
-
-var game = new GameState();
+string choice = Console.ReadLine() ?? "";
 
 if (choice.ToLower() == "y")
 {
-
-	game.Venue = "Subway";
-	game.Stage = 1;
-	game.Player = new Fighter("Carnitas", 100, new List<Move> { Move.Chop, Move.Kick });
-	JsonData.DataSave(game);
+	game.NewGame();
 }
 else
 {
-	game = JsonData.DataLoad();
+	game.LoadGame();
 	choice = "y";
 }
 
 
-while (game.Player.hitpoints > 0 && choice != "n")
+while (!game.IsGameOver() && choice != "n")
 {
-
 	Console.WriteLine("Level: " + game.Stage +
-		", Hitpoints: " + game.Player.hitpoints);
+		", Hitpoints: " + game.HitPoints);
 
 	Console.Write("Damage taken: ");
-	var hp = Console.ReadLine();
+	var hp = Console.ReadLine() ?? "";
 
-	if (int.TryParse(hp, out var num))
-	{
-		game.Player.hitpoints -= num;
-	}
-	game.Stage++;
-
+	game.Fight(hp);
 
 	Console.Write("Continue (y/n): ");
-	choice = Console.ReadLine();
+	choice = Console.ReadLine() ?? "";
 
 }
 
-JsonData.DataSave(game);
+game.SaveGame();
 

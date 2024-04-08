@@ -12,7 +12,7 @@ namespace HairsparyTacoWarrior.data
 	{
 		public static readonly string _filename = "game.data";
 
-		public static GameState DataLoad()
+		public static GameStateDO DataLoad()
 		{
 			string data = "{}";
 			using(var file = new StreamReader(_filename))
@@ -20,12 +20,12 @@ namespace HairsparyTacoWarrior.data
 				data = file.ReadToEnd();
 			}
 			var game = JsonConvert
-				.DeserializeObject<GameState>(data)
-				?? new GameState();
+				.DeserializeObject<GameStateDO>(data)
+				?? new GameStateDO();
 			return game;
 		}
 
-		public static void DataSave(GameState game)
+		public static void DataSave(GameStateDO game)
 		{
 			using (var file = new StreamWriter(_filename)) 
 			{ 
