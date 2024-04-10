@@ -6,7 +6,7 @@ namespace HairsprayTacoWarrior.logic
 	public class GameRunner
 	{
 		private GameState state;
-		private JsonData _datasource = new JsonData();
+		private IDataSource _datasource = new MicrosoftJsonData();
 
 		public int Stage => state.Stage;
 		public int HitPoints => state.Player.hitpoints;

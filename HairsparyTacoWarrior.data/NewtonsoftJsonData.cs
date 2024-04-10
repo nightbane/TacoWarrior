@@ -3,12 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace HairsparyTacoWarrior.data
 {
-	public class JsonData
+	public class NewtonsoftJsonData : IDataSource
 	{
 		public const string _filename = "game.data";
 
