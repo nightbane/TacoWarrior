@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace HairsparyTacoWarrior.data
 {
-	public static class JsonData
+	public class JsonData
 	{
-		public static readonly string _filename = "game.data";
+		public const string _filename = "game.data";
 
-		public static GameStateDO DataLoad()
+		public GameStateDO DataLoad()
 		{
 			string data = "{}";
 			using(var file = new StreamReader(_filename))
@@ -25,7 +25,7 @@ namespace HairsparyTacoWarrior.data
 			return game;
 		}
 
-		public static void DataSave(GameStateDO game)
+		public void DataSave(GameStateDO game)
 		{
 			using (var file = new StreamWriter(_filename)) 
 			{ 

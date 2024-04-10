@@ -6,6 +6,7 @@ namespace HairsprayTacoWarrior.logic
 	public class GameRunner
 	{
 		private GameState state;
+		private JsonData _datasource = new JsonData();
 
 		public int Stage => state.Stage;
 		public int HitPoints => state.Player.hitpoints;
@@ -32,17 +33,17 @@ namespace HairsprayTacoWarrior.logic
 			state.Venue = "Subway";
 			state.Stage = 1;
 			state.Player = new Fighter("Carnitas", 100, new List<Move> { Move.Chop, Move.Kick });
-			JsonData.DataSave(state.ToGameStateDO());
+			_datasource.DataSave(state.ToGameStateDO());
 		}
 
 		public void LoadGame()
 		{
-			state = GameState.FromGameStateDO(JsonData.DataLoad());
+			state = GameState.FromGameStateDO(_datasource.DataLoad());
 		}
 
 		public void SaveGame()
 		{
-			JsonData.DataSave(state.ToGameStateDO());
+			_datasource.DataSave(state.ToGameStateDO());
 		}
 	}
 }
